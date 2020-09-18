@@ -1,6 +1,20 @@
 {
-  "name": "canvas",
+  "name": "wave-pathfinding-algorithm",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "scripts": {
+    "start": "webpack-dev-server --history-api-fallback --inline --progress"
+  },
+  "repository": "https://github.com/dmytrohryb/wave-pathfinding-algorithm.git",
+  "author": "dmytrohryb <dmytro.hryb@nure.ua>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "babel-preset-env": "^1.7.0",
+    "html-webpack-plugin": "^4.4.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
 }
