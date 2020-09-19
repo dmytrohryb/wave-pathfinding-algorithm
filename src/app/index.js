@@ -3,6 +3,15 @@ import {Cell} from './Cell'
 let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 let cells = []
+let searchBtn = document.getElementById('searchBtn')
+let startBtn = document.getElementById('startBtn')
+let finishBtn = document.getElementById('finishBtn')
+let blockBtn = document.getElementById('blockBtn')
+
+const checkPoints = {
+    startPointSelected: false,
+    finishPointSelected: false
+}
 
 function copy(mainObj) {
     let objCopy = {};
@@ -19,6 +28,12 @@ class Grid {
 
         this.cells = []
         this.mouseDown = false
+
+        this.x = 0
+        this.y = 0
+
+        this.mode = ''
+
 
         this.initCanvas = this.initCanvas.bind(this)
         this.draw = this.draw.bind(this)
@@ -49,14 +64,24 @@ class Grid {
             rbp.y += 20
         }
 
+        let mode = this.mode
+
         canvas.addEventListener('mousedown', function (e) {
 
             let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop;
             this.mouseDown = true
             let X = -1 + Math.ceil(x/20)
             let Y = -1 + Math.ceil(y/20)
-            cells[Y][X].onClick()
-            console.log('pressed: ' + x + ';' + y)
+
+            if(checkPoints.startPointSelected && mode === 'start'){
+                cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick(mode, checkPoints)
+            }
+
+            if(checkPoints.finishPointSelected && mode === 'finish'){
+                cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick(mode, checkPoints)
+            }
+
+            cells[Y][X].onClick(mode, checkPoints)
         });
 
         canvas.addEventListener('mouseup', function (e) {
@@ -65,22 +90,39 @@ class Grid {
             let X = -1 + Math.ceil(x/20)
             let Y = -1 + Math.ceil(y/20)
 
-            console.log('clicked: ' + x + ';' + y)
-            //context.fillRect(Math.floor(x/20)*20, Math.floor(y/20)*20, 20, 20)
-
+            //console.log('clicked: ' + x + ';' + y)
         });
 
         canvas.addEventListener('mousemove', function (e) {
             if(this.mouseDown){
-                let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop;
-
+                let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop
+                this.x = x
+                this.y = y
                 let X = -1 + Math.ceil(x/20)
                 let Y = -1 + Math.ceil(y/20)
-                console.log('moved: ' + x + ';' + y)
-                cells[Y][X].onClick()
-                //context.fillRect(Math.floor(x/20)*20, Math.floor(y/20)*20, 20, 20)
+                //console.log('moved: ' + this.x + ';' + this.y)
+                if(!mode){
+                    cells[Y][X].onClick(mode, checkPoints)
+                }
             }
         });
+
+        searchBtn.addEventListener('mouseup', ()=>{
+            console.log(true)
+        })
+
+        startBtn.addEventListener('mouseup', ()=>{
+            mode = 'start'
+        })
+
+        finishBtn.addEventListener('mouseup', ()=>{
+            mode = 'finish'
+        })
+
+        blockBtn.addEventListener('mouseup', ()=>{
+            mode = ''
+        })
+
     }
 
     draw() {
@@ -104,10 +146,7 @@ class Grid {
             x = x + 20
         }
 
-
-        // do your drawing stuff here
     }
-
 }
 
-let grid = new Grid()
+let grid = new Grid(document)

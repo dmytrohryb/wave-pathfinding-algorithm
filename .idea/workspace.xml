@@ -23,22 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="52e3495c-dd4d-41a2-9a64-73bedf2b99dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/wave-pathfinding-algorithm.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Cell.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Cell.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +37,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -64,8 +53,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -76,7 +71,9 @@
       <option name="presentableId" value="Default" />
       <updated>1600426425923</updated>
       <workItem from="1600426427089" duration="6914000" />
-      <workItem from="1600433551067" duration="6493000" />
+      <workItem from="1600433551067" duration="7894000" />
+      <workItem from="1600455846233" duration="3511000" />
+      <workItem from="1600505071115" duration="13650000" />
     </task>
     <servers />
   </component>
@@ -96,6 +93,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="698" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600524966945">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="698" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600524966945" />
+    <state x="689" y="254" width="540" height="524" key="StructurePopup" timestamp="1600457236812">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="254" width="540" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1600457236812" />
+    <state x="624" y="237" key="run.anything.popup" timestamp="1600456577754">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="624" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600456577754" />
     <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1600441958989">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
