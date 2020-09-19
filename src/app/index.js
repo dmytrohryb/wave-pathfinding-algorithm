@@ -1,5 +1,5 @@
 import {Cell} from './Cell'
-
+const minWalk = require('./Algorithm')
 let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 let cells = []
@@ -25,8 +25,6 @@ function copy(mainObj) {
 
 class Grid {
     constructor() {
-
-        this.cells = []
         this.mouseDown = false
 
         this.x = 0
@@ -37,6 +35,8 @@ class Grid {
 
         this.initCanvas = this.initCanvas.bind(this)
         this.draw = this.draw.bind(this)
+        this.convertArray = this.convertArray.bind(this)
+        this.calculate = this.calculate.bind(this)
 
         this.initCanvas()
         this.draw()
@@ -55,7 +55,7 @@ class Grid {
             ltp.x = 0
             let rowCells = []
             while (rbp.x <= canvas.width){
-                rowCells.push(new Cell(copy(ltp), copy(rbp), context))
+                rowCells.push(new Cell(copy(ltp), copy(rbp), context, 'block'))
                 rbp.x += 20
                 ltp.x += 20
             }
@@ -74,11 +74,11 @@ class Grid {
             let Y = -1 + Math.ceil(y/20)
 
             if(checkPoints.startPointSelected && mode === 'start'){
-                cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick(mode, checkPoints)
+                cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick('block', checkPoints)
             }
 
             if(checkPoints.finishPointSelected && mode === 'finish'){
-                cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick(mode, checkPoints)
+                cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick('block', checkPoints)
             }
 
             cells[Y][X].onClick(mode, checkPoints)
@@ -108,7 +108,7 @@ class Grid {
         });
 
         searchBtn.addEventListener('mouseup', ()=>{
-            console.log(true)
+            this.calculate()
         })
 
         startBtn.addEventListener('mouseup', ()=>{
@@ -120,8 +120,26 @@ class Grid {
         })
 
         blockBtn.addEventListener('mouseup', ()=>{
-            mode = ''
+            mode = 'block'
         })
+
+    }
+
+    convertArray(arr){
+        let res = []
+        for (let i = 0; i < arr.length; i++){
+            let temp = []
+            for (let j = 0; j < arr[i].length; j++){
+                temp.push(arr[i][j].type)
+            }
+            res.push(temp)
+        }
+        return res
+    }
+
+    calculate(){
+        let res = this.convertArray(cells)
+        console.log(minWalk.minWalk(res, checkPoints.startPointSelected.y / 20, checkPoints.startPointSelected.x / 20, checkPoints.finishPointSelected.y / 20, checkPoints.finishPointSelected.x / 20))
 
     }
 
@@ -149,4 +167,4 @@ class Grid {
     }
 }
 
-let grid = new Grid(document)
+let grid = new Grid()

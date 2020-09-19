@@ -1,13 +1,21 @@
 export class Cell{
-    constructor(ltp, rbp, context) {
+    constructor(ltp, rbp, context, block) {
         this.ltp = ltp
         this.rbp = rbp
         this.isBlocked = false
-        this.mode = ''
+        this.mode = block
         this.context = context
         this.blockCell = this.blockCell.bind(this)
         this.unblockCell = this.unblockCell.bind(this)
         this.onClick = this.onClick.bind(this)
+    }
+
+    get type(){
+        if(this.mode === 'block' && this.isBlocked){
+            return 'X'
+        }else{
+            return '.'
+        }
     }
 
     blockCell(mode, checkpoints){
@@ -24,24 +32,15 @@ export class Cell{
             this.context.fillStyle = 'black'
             this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
         }
+
     }
 
     unblockCell(mode, checkpoints){
         this.isBlocked = false
         checkpoints.startPointSelected = false
         checkpoints.finishPointSelected = false
-        if(mode === 'start'){
-
-            this.context.fillStyle = 'white'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }else if(mode === 'finish'){
-
-            this.context.fillStyle = 'white'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }else{
-            this.context.fillStyle = 'white'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }
+        this.context.fillStyle = 'white'
+        this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
     }
 
     onClick(mode, checkpoints){
@@ -53,5 +52,6 @@ export class Cell{
         }else{
             this.blockCell(mode, checkpoints)
         }
+
     }
 }

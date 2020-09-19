@@ -26,7 +26,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -73,7 +72,8 @@
       <workItem from="1600426427089" duration="6914000" />
       <workItem from="1600433551067" duration="7894000" />
       <workItem from="1600455846233" duration="3511000" />
-      <workItem from="1600505071115" duration="13650000" />
+      <workItem from="1600505071115" duration="14440000" />
+      <workItem from="1600534772249" duration="6193000" />
     </task>
     <servers />
   </component>
