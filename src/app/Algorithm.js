@@ -55,10 +55,11 @@ function deepEqualObj (obj1, obj2){
     return JSON.stringify(obj1)===JSON.stringify(obj2);
 }
 
-function minWalk(gridList, startX, startY, endX, endY) {
+function minWalk(gridList, startX, startY, endX, endY, cells) {
     let R = prepareArray(gridList)
-    
+
     R[startX][startY] = 0
+    cells[startX][startY].fillCell(0)
     R[endX][endY] = 'к конечной точке нет ни одного пути'
 
     let count = 1
@@ -67,6 +68,7 @@ function minWalk(gridList, startX, startY, endX, endY) {
 
     for (let i = 0; i < wave.length; i++){ // помечаем точки
         R[wave[i].x][wave[i].y] = count
+        cells[wave[i].x][wave[i].y].fillCell(R[wave[i].x][wave[i].y])
     }
 
     let temp = true
@@ -90,6 +92,7 @@ function minWalk(gridList, startX, startY, endX, endY) {
 
         for (let i = 0; i < wave.length; i++){ // помечаем точки
             R[wave[i].x][wave[i].y] = count
+            cells[wave[i].x][wave[i].y].fillCell(R[wave[i].x][wave[i].y])
         }
     }
 
@@ -101,9 +104,9 @@ module.exports.minWalk = minWalk
 /*
 const result = minWalk(
     [
-        '.X.......',
-        '.X.......',
-        '.........',
+        '.X...X...',
+        '.X.X.X...',
+        '...X.....',
     ],
     2, 0,
     0, 6

@@ -7,7 +7,7 @@ let searchBtn = document.getElementById('searchBtn')
 let startBtn = document.getElementById('startBtn')
 let finishBtn = document.getElementById('finishBtn')
 let blockBtn = document.getElementById('blockBtn')
-
+let resetBtn = document.getElementById('resetBtn')
 const checkPoints = {
     startPointSelected: false,
     finishPointSelected: false
@@ -74,14 +74,16 @@ class Grid {
             let Y = -1 + Math.ceil(y/20)
 
             if(checkPoints.startPointSelected && mode === 'start'){
-                cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick('block', checkPoints)
+                cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick(mode, checkPoints)
             }
 
             if(checkPoints.finishPointSelected && mode === 'finish'){
-                cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick('block', checkPoints)
+                cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick(mode, checkPoints)
             }
 
+
             cells[Y][X].onClick(mode, checkPoints)
+
         });
 
         canvas.addEventListener('mouseup', function (e) {
@@ -89,8 +91,6 @@ class Grid {
             this.mouseDown = false
             let X = -1 + Math.ceil(x/20)
             let Y = -1 + Math.ceil(y/20)
-
-            //console.log('clicked: ' + x + ';' + y)
         });
 
         canvas.addEventListener('mousemove', function (e) {
@@ -100,8 +100,7 @@ class Grid {
                 this.y = y
                 let X = -1 + Math.ceil(x/20)
                 let Y = -1 + Math.ceil(y/20)
-                //console.log('moved: ' + this.x + ';' + this.y)
-                if(!mode){
+                if(mode != 'start' && mode !== 'finish'){
                     cells[Y][X].onClick(mode, checkPoints)
                 }
             }
@@ -123,6 +122,14 @@ class Grid {
             mode = 'block'
         })
 
+        resetBtn.addEventListener('mouseup', ()=>{
+            for (let i = 0; i < cells.length; i++){
+                for (let j = 0; j < cells[i].length; j++){
+                    cells[i][j].reset(checkPoints)
+                }
+            }
+        })
+
     }
 
     convertArray(arr){
@@ -131,6 +138,7 @@ class Grid {
             let temp = []
             for (let j = 0; j < arr[i].length; j++){
                 temp.push(arr[i][j].type)
+
             }
             res.push(temp)
         }
@@ -139,7 +147,7 @@ class Grid {
 
     calculate(){
         let res = this.convertArray(cells)
-        console.log(minWalk.minWalk(res, checkPoints.startPointSelected.y / 20, checkPoints.startPointSelected.x / 20, checkPoints.finishPointSelected.y / 20, checkPoints.finishPointSelected.x / 20))
+        console.log(minWalk.minWalk(res, checkPoints.startPointSelected.y / 20, checkPoints.startPointSelected.x / 20, checkPoints.finishPointSelected.y / 20, checkPoints.finishPointSelected.x / 20, cells))
 
     }
 
@@ -163,7 +171,6 @@ class Grid {
             context.stroke();
             x = x + 20
         }
-
     }
 }
 
