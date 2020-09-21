@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --inline --progress"
+    "start": "webpack-dev-server --history-api-fallback --inline --progress",
+    "build": "webpack --mode=production"
   },
   "repository": "https://github.com/dmytrohryb/wave-pathfinding-algorithm.git",
   "author": "dmytrohryb <dmytro.hryb@nure.ua>",

@@ -5,7 +5,7 @@ export class Cell{
         this.isBlocked = false
         this.mode = block
         this.context = context
-        this.speed = 50
+        this.speed = 20
         this.blockCell = this.blockCell.bind(this)
         this.unblockCell = this.unblockCell.bind(this)
         this.onClick = this.onClick.bind(this)
@@ -85,14 +85,19 @@ export class Cell{
         this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
     }
 
-    fillCell(i){
+    fillCell(i, activate){
         if(!this.isBlocked){
             setTimeout(() => {
-                this.context.fillStyle = 'aqua'
-                this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-                this.context.fillStyle = 'black'
-                this.context.fillText(i,this.ltp.x+4, this.ltp.y+20-4)
-            }, (i === 0) ? 1 : 100 + i * this.speed)
+                if(activate){
+                    this.context.fillStyle = 'aqua'
+                    this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
+                    this.context.fillStyle = 'black'
+                    this.context.fillText(i,this.ltp.x+4, this.ltp.y+20-4)
+                }else{
+                    this.context.fillStyle = 'white'
+                    this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
+                }
+            }, (i === 0) ? 1 : 100 + i * this.speed) //(i === 0) ? 1 : 100 + i * this.speed
         }
     }
 

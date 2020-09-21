@@ -138,7 +138,6 @@ class Grid {
             let temp = []
             for (let j = 0; j < arr[i].length; j++){
                 temp.push(arr[i][j].type)
-
             }
             res.push(temp)
         }
@@ -148,7 +147,6 @@ class Grid {
     calculate(){
         let res = this.convertArray(cells)
         console.log(minWalk.minWalk(res, checkPoints.startPointSelected.y / 20, checkPoints.startPointSelected.x / 20, checkPoints.finishPointSelected.y / 20, checkPoints.finishPointSelected.x / 20, cells))
-
     }
 
     draw() {
