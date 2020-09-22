@@ -1,11 +1,11 @@
 export class Cell{
-    constructor(ltp, rbp, context, block) {
+    constructor(ltp, context, block) {
         this.ltp = ltp
-        this.rbp = rbp
+
         this.isBlocked = false
         this.mode = block
         this.context = context
-        this.speed = 20
+        this.speed = 25
         this.blockCell = this.blockCell.bind(this)
         this.unblockCell = this.unblockCell.bind(this)
         this.onClick = this.onClick.bind(this)
@@ -36,12 +36,15 @@ export class Cell{
     setSpeed(speed){
         switch (speed){
             case 'low':
-                this.speed = 500
+                this.speed = 200
                 break;
             case 'mid':
-                this.speed = 150
+                this.speed = 100
                 break;
             case 'high':
+                this.speed = 50
+                break;
+            case 'very high':
                 this.speed = 25
                 break;
             default:
@@ -102,9 +105,9 @@ export class Cell{
     }
 
     onClick(mode, checkpoints){
-        if(mode !== this.mode){
+        //if(mode !== this.mode){
             this.mode = mode
-        }
+        //}
         if(this.isBlocked){
             this.unblockCell(mode, checkpoints)
         }else{

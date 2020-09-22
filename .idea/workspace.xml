@@ -24,7 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="52e3495c-dd4d-41a2-9a64-73bedf2b99dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Algorithm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Algorithm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/index.js" afterDir="false" />
@@ -78,7 +77,9 @@
       <workItem from="1600534772249" duration="7630000" />
       <workItem from="1600579323526" duration="27217000" />
       <workItem from="1600626852801" duration="9324000" />
-      <workItem from="1600688486811" duration="9079000" />
+      <workItem from="1600688486811" duration="9867000" />
+      <workItem from="1600763981477" duration="6322000" />
+      <workItem from="1600776588048" duration="7848000" />
     </task>
     <servers />
   </component>
@@ -110,9 +111,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="624" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600456577754" />
-    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1600631775007">
+    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1600781252932">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600631775007" />
+    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600781252932" />
   </component>
 </project>

@@ -1,13 +1,13 @@
 function neighboringPoints(x, y, w, h, arr){ // получение индексов соседних свободных точек
     let points = [
-        (x < w && x >= 0 && y-1 < h && y-1 >= 0 && arr[x][y-1] !== 'X' && typeof arr[x][y-1] !== typeof 1) ? {x: x, y: y-1} : false, // средняя левая ячейка
+        (x-1 < w && x-1 >= 0 && y < h && y >= 0 && arr[x-1][y] !== 'X' && typeof arr[x-1][y] !== typeof 1) ? {x: x-1, y: y} : false, // средняя левая ячейка
         (x-1 < w && x-1 >= 0 && y-1 < h && y-1 >= 0 && arr[x-1][y-1] !== 'X' && typeof arr[x-1][y-1] !== typeof 1) ? {x: x-1, y: y-1} : false,
-        (x-1 < w && x-1 >= 0 && y < h && y >= 0 && arr[x-1][y] !== 'X' && typeof arr[x-1][y] !== typeof 1) ? {x: x-1, y: y} : false,
-        (x-1 < w && x-1 >= 0 && y+1 < h && y+1 >= 0 && arr[x-1][y+1] !== 'X' && typeof arr[x-1][y+1] !== typeof 1) ? {x: x-1, y: y+1} : false,
-        (x < w && x >= 0 && y+1 < h && y+1 >= 0 && arr[x][y+1] !== 'X' && typeof arr[x][y+1] !== typeof 1) ? {x: x, y: y+1} : false,
-        (x+1 < w && x+1 >= 0 && y+1 < h && y+1 >= 0 && arr[x+1][y+1] !== 'X' && typeof arr[x+1][y+1] !== typeof 1) ? {x: x+1, y: y+1} : false,
+        (x < w && x >= 0 && y-1 < h && y-1 >= 0 && arr[x][y-1] !== 'X' && typeof arr[x][y-1] !== typeof 1) ? {x: x, y: y-1} : false,
+        (x+1 < w && x+1 >= 0 && y-1 < h && y-1 >= 0 && arr[x+1][y-1] !== 'X' && typeof arr[x+1][y-1] !== typeof 1) ? {x: x+1, y: y-1} : false,
         (x+1 < w && x+1 >= 0 && y < h && y >= 0 && arr[x+1][y] !== 'X' && typeof arr[x+1][y] !== typeof 1) ? {x: x+1, y: y} : false,
-        (x+1 < w && x+1 >= 0 && y-1 < h && y-1 >= 0 && arr[x+1][y-1] !== 'X' && typeof arr[x+1][y-1] !== typeof 1) ? {x: x+1, y: y-1} : false
+        (x+1 < w && x+1 >= 0 && y+1 < h && y+1 >= 0 && arr[x+1][y+1] !== 'X' && typeof arr[x+1][y+1] !== typeof 1) ? {x: x+1, y: y+1} : false,
+        (x < w && x >= 0 && y+1 < h && y+1 >= 0 && arr[x][y+1] !== 'X' && typeof arr[x][y+1] !== typeof 1) ? {x: x, y: y+1} : false,
+        (x-1 < w && x-1 >= 0 && y+1 < h && y+1 >= 0 && arr[x-1][y+1] !== 'X' && typeof arr[x-1][y+1] !== typeof 1) ? {x: x-1, y: y+1} : false
     ]
     let temp = [
         points[0],
@@ -29,18 +29,31 @@ function neighboringPoints(x, y, w, h, arr){ // получение индекс�
 }
 
 function pathPoints(y, x, w, h, arr){ // получение индексов соседних свободных точек
-    //console.log(arr)
-    //console.log(x, y)
-    //console.log(arr[x][y-1])
-    if(arr[x][y] - arr[x][y-1] === 1 && x < w && x >= 0 && y-1 < h && y-1 >= 0 && arr[x][y-1]) return {x: x, y: y-1} // средняя левая ячейка
-    if(arr[x][y] - arr[x-1][y-1] === 1 && x-1 < w && x-1 >= 0 && y-1 < h && y-1 >= 0 && arr[x-1][y-1]) return {x: x-1, y: y-1}
-    if(arr[x][y] - arr[x-1][y] === 1 && x-1 < w && x-1 >= 0 && y < h && y >= 0 && arr[x-1][y]) return {x: x-1, y: y}
-    if(arr[x][y] - arr[x-1][y+1] === 1 && x-1 < w && x-1 >= 0 && y+1 < h && y+1 >= 0 && arr[x-1][y+1]) return {x: x-1, y: y+1}
-    if(arr[x][y] - arr[x][y+1] === 1 && x < w && x >= 0 && y+1 < h && y+1 >= 0 && arr[x][y+1]) return {x: x, y: y+1}
-    if(arr[x][y] - arr[x+1][y+1] === 1 && x+1 < w && x+1 >= 0 && y+1 < h && y+1 >= 0 && arr[x+1][y+1]) return {x: x+1, y: y+1}
-    if(arr[x][y] - arr[x+1][y] === 1 && x+1 < w && x+1 >= 0 && y < h && y >= 0 && arr[x+1][y]) return {x: x+1, y: y}
-    if(arr[x][y] - arr[x+1][y-1] === 1 && x+1 < w && x+1 >= 0 && y-1 < h && y-1 >= 0 && arr[x+1][y-1]) return {x: x+1, y: y-1}
-    return false
+
+    console.log('metka: ', x)
+    let coordinates = false
+
+    if(arr[x][y] - arr[x-1][y] === 1 && x-1 < w && x-1 >= 0 && y < h && y >= 0 ) coordinates = {x: x-1, y: y}// средняя левая ячейка
+    if(coordinates) return coordinates
+    if(arr[x][y] - arr[x][y-1] === 1 && x < w && x >= 0 && y-1 < h && y-1 >= 0 ) coordinates = {x: x, y: y-1}
+    if(coordinates) return coordinates
+    if(arr[x][y] - arr[x+1][y] === 1 && x+1 < w && x+1 >= 0 && y < h && y >= 0 ) coordinates = {x: x+1, y: y}
+    if(coordinates) return coordinates
+    if(arr[x][y] - arr[x][y+1] === 1 && x < w && x >= 0 && y+1 < h && y+1 >= 0 ) coordinates = {x: x, y: y+1}
+    if(coordinates) return coordinates
+
+
+    if(!coordinates){
+        if(arr[x][y] - arr[x-1][y-1] === 1 && x-1 < w && x-1 >= 0 && y-1 < h && y-1 >= 0 && (arr[x-1][y] !== 'X' || arr[x][y-1] !== 'X')) coordinates = {x: x-1, y: y-1}
+        if(coordinates) return coordinates
+        if(arr[x][y] - arr[x+1][y-1] === 1 && x+1 < w && x+1 >= 0 && y-1 < h && y-1 >= 0 && (arr[x][y-1] !== 'X' || arr[x+1][y] !== 'X')) coordinates = {x: x+1, y: y-1}
+        if(coordinates) return coordinates
+        if(arr[x][y] - arr[x+1][y+1] === 1 && x+1 < w && x+1 >= 0 && y+1 < h && y+1 >= 0 && (arr[x+1][y] !== 'X' || arr[x][y+1] !== 'X')) coordinates = {x: x+1, y: y+1}
+        if(coordinates) return coordinates
+        if(arr[x][y] - arr[x-1][y+1] === 1 && x-1 < w && x-1 >= 0 && y+1 < h && y+1 >= 0 && (arr[x][y+1] !== 'X' || arr[x-1][y] !== 'X')) coordinates = {x: x-1, y: y+1}
+        if(coordinates) return coordinates
+    }
+    return coordinates
 }
 
 function prepareArray(arr){ // преобразование строк внутри массива во вложенные массивы символов
@@ -148,18 +161,12 @@ function pathFind(startX, startY, endX, endY, R, cells, count){
             cells[i][j].fillCell(0, false)
         }
     }
-    //console.log(startY, startX)
-    console.log(endX, endY)
-    //console.log(R[startX][startY])
-    console.log(R[endX][endY])
-
     cells[endX][endY].fillCell(0, true)
-    let isDone = false
     let curPoint = {x: endY, y: endX}
     let c = count-1
     for(let i = 0; i < count-1; i++){
         let temp = pathPoints(curPoint.x, curPoint.y, R.length, R[0].length, R)
-        console.log(temp)
+
         if(temp){
             cells[temp.x][temp.y].fillCell(c--, true)
             curPoint = {x: temp.y, y: temp.x}
@@ -168,31 +175,3 @@ function pathFind(startX, startY, endX, endY, R, cells, count){
 }
 
 module.exports.minWalk = minWalk
-
-/*
-
-for(let i = 0; i < wave.length; i++){
-            //console.log(cu2 - R[wave[i].y][wave[i].x])
-            if((cu2 - R[wave[i].x][wave[i].y]) === 1 && !isDone){
-                curPoint = {x: wave[i].x, y: wave[i].y}
-                cu2 = R[wave[i].x][wave[i].y]
-                cells[wave[i].x][wave[i].y].fillCell(R[wave[i].x][wave[i].y], true)
-                if(R[wave[i].x][wave[i].y] === 1)
-                {
-                    isDone = true
-                    break
-                }
-            }
-        }
-const result = minWalk(
-    [
-        '.X...X...',
-        '.X.X.X...',
-        '...X.....',
-    ],
-    2, 0,
-    0, 6
-)
-
-console.log(result)
-*/

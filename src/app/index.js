@@ -47,21 +47,15 @@ class Grid {
         canvas.height = window.innerHeight
 
         let ltp = {x: 0, y: 0}
-        let rbp = {x: 20, y: 20}
-
-
-        while (rbp.y <= canvas.height){
-            rbp.x = 20
+        while (ltp.y < canvas.height){
             ltp.x = 0
             let rowCells = []
-            while (rbp.x <= canvas.width){
-                rowCells.push(new Cell(copy(ltp), copy(rbp), context, 'block'))
-                rbp.x += 20
+            while (ltp.x < canvas.width){
+                rowCells.push(new Cell(copy(ltp), context, 'block'))
                 ltp.x += 20
             }
             cells.push(rowCells)
             ltp.y += 20
-            rbp.y += 20
         }
 
         let mode = this.mode
@@ -76,11 +70,9 @@ class Grid {
             if(checkPoints.startPointSelected && mode === 'start'){
                 cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick(mode, checkPoints)
             }
-
             if(checkPoints.finishPointSelected && mode === 'finish'){
                 cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick(mode, checkPoints)
             }
-
 
             cells[Y][X].onClick(mode, checkPoints)
 
@@ -146,6 +138,7 @@ class Grid {
 
     calculate(){
         let res = this.convertArray(cells)
+        //console.log(res)
         console.log(minWalk.minWalk(res, checkPoints.startPointSelected.y / 20, checkPoints.startPointSelected.x / 20, checkPoints.finishPointSelected.y / 20, checkPoints.finishPointSelected.x / 20, cells))
     }
 
