@@ -1,168 +1,58 @@
-import {Cell} from './Cell'
-const minWalk = require('./Algorithm')
-let canvas = document.getElementById('canvas')
-let context = canvas.getContext('2d')
-let cells = []
-let searchBtn = document.getElementById('searchBtn')
-let startBtn = document.getElementById('startBtn')
-let finishBtn = document.getElementById('finishBtn')
-let blockBtn = document.getElementById('blockBtn')
-let resetBtn = document.getElementById('resetBtn')
-const checkPoints = {
-    startPointSelected: false,
-    finishPointSelected: false
-}
+import {Grid} from "./Grid"
+import {pathFind} from "./Algorithm"
 
-function copy(mainObj) {
-    let objCopy = {};
-    let key;
+const canvas = document.getElementById('canvas')
+const context = canvas.getContext('2d')
 
-    for (key in mainObj) {
-        objCopy[key] = mainObj[key];
-    }
-    return objCopy;
-}
+canvas.width = window.innerWidth - 39
+canvas.height = window.innerHeight - 60
 
-class Grid {
-    constructor() {
-        this.mouseDown = false
+canvas.addEventListener('mousedown', (e)=>{
+    let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop
+    let indexes = {x: Math.floor(y / cellSize), y: Math.floor(x/cellSize)}
+    grid.handleMouseDown(indexes)
+})
 
-        this.x = 0
-        this.y = 0
+canvas.addEventListener('mouseup', (e)=>{
+    grid.handleMouseUp()
+})
 
-        this.mode = ''
-
-
-        this.initCanvas = this.initCanvas.bind(this)
-        this.draw = this.draw.bind(this)
-        this.convertArray = this.convertArray.bind(this)
-        this.calculate = this.calculate.bind(this)
-
-        this.initCanvas()
-        this.draw()
-    }
-
-    initCanvas(){
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
-
-        let ltp = {x: 0, y: 0}
-        while (ltp.y < canvas.height){
-            ltp.x = 0
-            let rowCells = []
-            while (ltp.x < canvas.width){
-                rowCells.push(new Cell(copy(ltp), context, 'block'))
-                ltp.x += 20
-            }
-            cells.push(rowCells)
-            ltp.y += 20
-        }
-
-        let mode = this.mode
-
-        canvas.addEventListener('mousedown', function (e) {
-
-            let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop;
-            this.mouseDown = true
-            let X = -1 + Math.ceil(x/20)
-            let Y = -1 + Math.ceil(y/20)
-
-            if(checkPoints.startPointSelected && mode === 'start'){
-                cells[checkPoints.startPointSelected.y / 20][checkPoints.startPointSelected.x / 20].onClick(mode, checkPoints)
-            }
-            if(checkPoints.finishPointSelected && mode === 'finish'){
-                cells[checkPoints.finishPointSelected.y / 20][checkPoints.finishPointSelected.x / 20].onClick(mode, checkPoints)
-            }
-
-            cells[Y][X].onClick(mode, checkPoints)
-
-        });
-
-        canvas.addEventListener('mouseup', function (e) {
-            let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop;
-            this.mouseDown = false
-            let X = -1 + Math.ceil(x/20)
-            let Y = -1 + Math.ceil(y/20)
-        });
-
-        canvas.addEventListener('mousemove', function (e) {
-            if(this.mouseDown){
-                let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop
-                this.x = x
-                this.y = y
-                let X = -1 + Math.ceil(x/20)
-                let Y = -1 + Math.ceil(y/20)
-                if(mode != 'start' && mode !== 'finish'){
-                    cells[Y][X].onClick(mode, checkPoints)
-                }
-            }
-        });
-
-        searchBtn.addEventListener('mouseup', ()=>{
-            this.calculate()
-        })
-
-        startBtn.addEventListener('mouseup', ()=>{
-            mode = 'start'
-        })
-
-        finishBtn.addEventListener('mouseup', ()=>{
-            mode = 'finish'
-        })
-
-        blockBtn.addEventListener('mouseup', ()=>{
-            mode = 'block'
-        })
-
-        resetBtn.addEventListener('mouseup', ()=>{
-            for (let i = 0; i < cells.length; i++){
-                for (let j = 0; j < cells[i].length; j++){
-                    cells[i][j].reset(checkPoints)
-                }
-            }
-        })
-
-    }
-
-    convertArray(arr){
-        let res = []
-        for (let i = 0; i < arr.length; i++){
-            let temp = []
-            for (let j = 0; j < arr[i].length; j++){
-                temp.push(arr[i][j].type)
-            }
-            res.push(temp)
-        }
-        return res
-    }
-
-    calculate(){
-        let res = this.convertArray(cells)
-        //console.log(res)
-        console.log(minWalk.minWalk(res, checkPoints.startPointSelected.y / 20, checkPoints.startPointSelected.x / 20, checkPoints.finishPointSelected.y / 20, checkPoints.finishPointSelected.x / 20, cells))
-    }
-
-    draw() {
-        let y = 0
-
-        while (y < canvas.height){
-            context.beginPath();
-            context.moveTo(0, y);
-            context.lineTo(canvas.width, y);
-            context.stroke();
-            y = y + 20
-        }
-
-        let x = 0
-
-        while (x < canvas.width){
-            context.beginPath();
-            context.moveTo(x, 0);
-            context.lineTo(x, canvas.height);
-            context.stroke();
-            x = x + 20
+canvas.addEventListener('mousemove', (e) => {
+    if(grid.mouseDown){
+        if(grid.Mode === 'block'){
+            let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop
+            let indexes = {x: Math.floor(y / cellSize), y: Math.floor(x/cellSize)}
+            grid.handleMouseDown(indexes)
         }
     }
-}
+})
 
-let grid = new Grid()
+const searchBtn = document.getElementById('searchBtn')
+const startBtn = document.getElementById('startBtn')
+const finishBtn = document.getElementById('finishBtn')
+const blockBtn = document.getElementById('blockBtn')
+const resetBtn = document.getElementById('resetBtn')
+
+searchBtn.addEventListener('mouseup', ()=>{
+    pathFind(grid, grid.Width, grid.Height, Math.floor(grid.startPoint.y / cellSize), Math.floor(grid.startPoint.x / cellSize), Math.floor(grid.finishPoint.y / 20), Math.floor(grid.finishPoint.x / 20))
+})
+
+startBtn.addEventListener('mouseup', ()=>{
+    grid.Mode = 'start'
+})
+
+finishBtn.addEventListener('mouseup', ()=>{
+    grid.Mode = 'finish'
+})
+
+blockBtn.addEventListener('mouseup', ()=>{
+    grid.Mode = 'block'
+})
+
+resetBtn.addEventListener('mouseup', ()=>{
+    grid.reset()
+})
+
+let cellSize = 10
+
+const grid = new Grid(canvas, context, cellSize)

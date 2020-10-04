@@ -25,7 +25,6 @@
     <list default="true" id="52e3495c-dd4d-41a2-9a64-73bedf2b99dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Algorithm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Algorithm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -80,6 +79,9 @@
       <workItem from="1600688486811" duration="9867000" />
       <workItem from="1600763981477" duration="6322000" />
       <workItem from="1600776588048" duration="7848000" />
+      <workItem from="1601757479535" duration="874000" />
+      <workItem from="1601801148544" duration="3375000" />
+      <workItem from="1601835426517" duration="4326000" />
     </task>
     <servers />
   </component>

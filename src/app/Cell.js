@@ -1,117 +1,64 @@
-export class Cell{
-    constructor(ltp, context, block) {
-        this.ltp = ltp
-
-        this.isBlocked = false
-        this.mode = block
+export class Cell {
+    constructor(ltp, color, context, size) {
+        this.x = ltp.x
+        this.y = ltp.y
+        this.size = size
+        this.mode = 'unblocked'
         this.context = context
-        this.speed = 25
-        this.blockCell = this.blockCell.bind(this)
-        this.unblockCell = this.unblockCell.bind(this)
-        this.onClick = this.onClick.bind(this)
-        this.fillCell = this.fillCell.bind(this)
-        this.setSpeed = this.setSpeed.bind(this)
-        this.reset = this.reset.bind(this)
-
+        this.blocked = false
+        this.label = false
     }
 
-    reset(checkpoints){
-        if(this.mode === 'start'){
-            this.unblockCell('start', checkpoints)
-        }else if(this.mode === 'finish'){
-            this.unblockCell('finish', checkpoints)
-        }else{
-            this.unblockCell('block', checkpoints)
-        }
+    get Label(){
+        return this.label
     }
 
-    get type(){
-        if(this.mode === 'block' && this.isBlocked){
-            return 'X'
-        }else{
-            return '.'
-        }
+    set changeLabel(label){
+        this.label = label
     }
 
-    setSpeed(speed){
-        switch (speed){
-            case 'low':
-                this.speed = 200
+    get Mode(){
+        return this.mode
+    }
+
+    get isBlocked(){
+        return this.blocked
+    }
+
+    block(mode){
+        switch (mode){
+            case 'start':
+                this.fill('green')
                 break;
-            case 'mid':
-                this.speed = 100
+            case 'finish':
+                this.fill('red')
                 break;
-            case 'high':
-                this.speed = 50
+            case 'path':
+                this.fill('lightblue')
                 break;
-            case 'very high':
-                this.speed = 25
+            case 'block':
+                this.fill('black')
                 break;
             default:
-
+                this.unblock()
                 break;
         }
+        this.mode = mode
+        this.blocked = true
     }
 
-    blockCell(mode, checkpoints){
-        this.isBlocked = true
-        if(mode === 'start'){
-            checkpoints.startPointSelected = {x: this.ltp.x, y: this.ltp.y}
-            this.context.fillStyle = 'green'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }else if(mode === 'finish'){
-            checkpoints.finishPointSelected = {x: this.ltp.x, y: this.ltp.y}
-            this.context.fillStyle = 'red'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }else{
-            this.context.fillStyle = 'black'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }
+    unblock(){
+        this.blocked = false
+        this.mode = 'unblocked'
+        this.fill('white')
     }
 
-    unblockCell(mode, checkpoints){
-        this.isBlocked = false
-        if(mode === 'start'){
-            checkpoints.startPointSelected = false
-            this.context.fillStyle = 'green'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }else if(mode === 'finish'){
-            checkpoints.finishPointSelected = false
-            this.context.fillStyle = 'red'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }else{
-            this.context.fillStyle = 'black'
-            this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-        }
-        this.mode = 'block'
-        this.context.fillStyle = 'white'
-        this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
+    reset(){
+        this.label = false
     }
 
-    fillCell(i, activate){
-        if(!this.isBlocked){
-            setTimeout(() => {
-                if(activate){
-                    this.context.fillStyle = 'aqua'
-                    this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-                    this.context.fillStyle = 'black'
-                    this.context.fillText(i,this.ltp.x+4, this.ltp.y+20-4)
-                }else{
-                    this.context.fillStyle = 'white'
-                    this.context.fillRect(this.ltp.x+1, this.ltp.y+1, 18, 18)
-                }
-            }, (i === 0) ? 1 : 100 + i * this.speed) //(i === 0) ? 1 : 100 + i * this.speed
-        }
-    }
-
-    onClick(mode, checkpoints){
-        //if(mode !== this.mode){
-            this.mode = mode
-        //}
-        if(this.isBlocked){
-            this.unblockCell(mode, checkpoints)
-        }else{
-            this.blockCell(mode, checkpoints)
-        }
+    fill(color){
+        this.context.fillStyle = color
+        this.context.fillRect(this.x+1, this.y+1, this.size - 2, this.size - 2)
     }
 }
