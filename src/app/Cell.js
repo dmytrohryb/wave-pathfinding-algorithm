@@ -9,12 +9,21 @@ export class Cell {
         this.label = false
     }
 
+    get X(){
+        return this.x / this.size
+    }
+
+    get Y(){
+        return this.y / this.size
+    }
+
     get Label(){
         return this.label
     }
 
     set changeLabel(label){
         this.label = label
+        this.fillText(label)
     }
 
     get Mode(){
@@ -34,7 +43,7 @@ export class Cell {
                 this.fill('red')
                 break;
             case 'path':
-                this.fill('lightblue')
+                this.fill('aqua')
                 break;
             case 'block':
                 this.fill('black')
@@ -50,11 +59,14 @@ export class Cell {
     unblock(){
         this.blocked = false
         this.mode = 'unblocked'
+        this.label = false
         this.fill('white')
     }
 
-    reset(){
-        this.label = false
+    fillText(text){
+        this.context.fillStyle = 'black'
+        this.context.font = "10px Verdana";
+        this.context.fillText(text, this.x + (this.size / 2 - 3), this.y + (this.size / 2 + 4));
     }
 
     fill(color){

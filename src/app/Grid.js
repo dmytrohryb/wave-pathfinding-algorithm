@@ -8,6 +8,7 @@ export class Grid{
         this.cells = []
         this.cellSize = cellSize
         this.mouseDown = false
+        this.pathFinded = false
         this.init()
         this.draw()
     }
@@ -51,6 +52,7 @@ export class Grid{
     }
 
     init() {
+        this.cells = []
         let ltp = {x: 0, y: 0}
         while (ltp.y < this.canvas.height){
             ltp.x = 0
@@ -104,6 +106,7 @@ export class Grid{
     }
 
     draw() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         let y = 0
 
         while (y < this.canvas.height){
