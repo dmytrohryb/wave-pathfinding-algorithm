@@ -6,7 +6,7 @@ const context = canvas.getContext('2d')
 
 canvas.width = window.innerWidth - 39
 canvas.height = window.innerHeight - 60
-let cellSize = 40
+let cellSize = 20
 canvas.addEventListener('mousedown', (e)=>{
     let x = e.pageX - e.target.offsetLeft, y = e.pageY - e.target.offsetTop
     let indexes = {x: Math.floor(y / cellSize), y: Math.floor(x/cellSize)}
@@ -33,7 +33,7 @@ const finishBtn = document.getElementById('finishBtn')
 const blockBtn = document.getElementById('blockBtn')
 const resetBtn = document.getElementById('resetBtn')
 const cellsize = document.getElementById('value')
-cellsize.innerText = 2
+cellsize.innerText = 1
 
 const plusBtn = document.getElementById('plus')
 const minusBtn = document.getElementById('minus')

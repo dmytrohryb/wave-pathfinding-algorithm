@@ -71,6 +71,7 @@ export function pathFind(grid, width, height, startX, startY, finishX, finishY){
 }
 
 function reverseWavePropagation(x, y, w, h, cells){
+
     let temp = [
         (x-1 < w && x-1 >= 0 && y < h && y >= 0 && (cells[y][x-1].Label - cells[y][x].Label === -1)) ? cells[y][x-1] : false,
         (x < w && x >= 0 && y-1 < h && y-1 >= 0 && (cells[y-1][x].Label - cells[y][x].Label === -1)) ? cells[y-1][x] : false,
@@ -87,10 +88,10 @@ function reverseWavePropagation(x, y, w, h, cells){
         return data[0]
     }else{
         temp = [
-            (x-1 < w && x-1 >= 0 && y-1 < h && y-1 >= 0 && (cells[y-1][x-1].Label - cells[y][x].Label === -1)) ? cells[y-1][x-1] : false,
-            (x+1 < w && x+1 >= 0 && y-1 < h && y-1 >= 0 && (cells[y-1][x+1].Label - cells[y][x].Label === -1)) ? cells[y-1][x+1] : false,
-            (x+1 < w && x+1 >= 0 && y+1 < h && y+1 >= 0 && (cells[y+1][x+1].Label - cells[y][x].Label === -1)) ? cells[y+1][x+1] : false,
-            (x-1 < w && x-1 >= 0 && y+1 < h && y+1 >= 0 && (cells[y+1][x-1].Label - cells[y][x].Label === -1)) ? cells[y+1][x-1] : false
+            (x-1 < w && x-1 >= 0 && y-1 < h && y-1 >= 0 && (cells[y-1][x-1].Label - cells[y][x].Label === -1) && (cells[y][x-1].Mode !== 'block' || cells[y-1][x].Mode !== 'block')) ? cells[y-1][x-1] : false,
+            (x+1 < w && x+1 >= 0 && y-1 < h && y-1 >= 0 && (cells[y-1][x+1].Label - cells[y][x].Label === -1) && (cells[y-1][x].Mode !== 'block' || cells[y][x+1].Mode !== 'block')) ? cells[y-1][x+1] : false,
+            (x+1 < w && x+1 >= 0 && y+1 < h && y+1 >= 0 && (cells[y+1][x+1].Label - cells[y][x].Label === -1) && (cells[y][x+1].Mode !== 'block' || cells[y+1][x].Mode !== 'block')) ? cells[y+1][x+1] : false,
+            (x-1 < w && x-1 >= 0 && y+1 < h && y+1 >= 0 && (cells[y+1][x-1].Label - cells[y][x].Label === -1) && (cells[y+1][x].Mode !== 'block' || cells[y][x-1].Mode !== 'block')) ? cells[y+1][x-1] : false
         ]
         temp.forEach(element => {
             if(element) data.push(element)
@@ -102,7 +103,7 @@ function reverseWavePropagation(x, y, w, h, cells){
     }
 }
 
-function adjacentСells(x, y, w, h, cells){ // получение индексов соседних свободных ячеек
+function adjacentСells(x, y, w, h, cells){ // получение индексов соседних ячеек
     let _cells = [
         (x-1 < w && x-1 >= 0 && y < h && y >= 0) ? cells[y][x-1] : false, // средняя левая ячейка
         (x-1 < w && x-1 >= 0 && y-1 < h && y-1 >= 0) ? cells[y-1][x-1] : false,

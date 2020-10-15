@@ -112,7 +112,7 @@ export class Grid{
         while (y < this.canvas.height){
             this.context.beginPath();
             this.context.moveTo(0, y);
-            this.context.lineTo(this.canvas.width, y);
+            this.context.lineTo(this.Width * this.cellSize, y);
             this.context.stroke();
             y = y + this.cellSize
         }
@@ -122,7 +122,7 @@ export class Grid{
         while (x < this.canvas.width){
             this.context.beginPath();
             this.context.moveTo(x, 0);
-            this.context.lineTo(x, this.canvas.height);
+            this.context.lineTo(x, this.Height * this.cellSize);
             this.context.stroke();
             x = x + this.cellSize
         }
